@@ -4,8 +4,6 @@ import socket
 import sys
 from bs4 import BeautifulSoup
 
-socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, '127.0.0.1', 9050)
-socket.socket = socks.socksocket
 
 proxies = {
     'http': 'socks5h://127.0.0.1:9050',
