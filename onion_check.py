@@ -1,9 +1,5 @@
 import requests
-import socks
-import socket
-import sys
 from bs4 import BeautifulSoup
-
 
 proxies = {
     'http': 'socks5h://127.0.0.1:9050',
@@ -13,9 +9,11 @@ proxies = {
 # To check the IP just remove the comment from next line....
 print("Tor Connection Check")
 try:
-    tor_ip = requests.get('https://ident.me').text
-    print('Tor_IP: ', tor_ip)
-    print("Tor Connection Success ")
+    system_ip = requests.get('https://ident.me', proxies=proxies).text
+    tor_ip_list = requests.get('https://check.torproject.org/exit-addresses').text
+    if system_ip in tor_ip_list:
+        print('Tor_IP: ', system_ip)
+        print("Tor Connection Success ")
 except Exception as e:
     print("Error: Configure Tor as service")
     print("For quick setup refer: https://miloserdov.org/?p=1839")
@@ -30,7 +28,7 @@ for url in input_file:
         data = requests.get(url, proxies=proxies)
     except:
         data = 'error'
-    if '200' in str(data):
+    if data.status_code < 400:
         status = 'Active'
         soup = BeautifulSoup(data.text, 'html.parser')
         for url_title in soup.find_all('title'):
