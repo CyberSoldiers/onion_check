@@ -14,7 +14,7 @@ try:
     if system_ip in tor_ip_list:
         print('Tor_IP: ', system_ip)
         print("Tor Connection Success ")
-except Exception as e:
+except:
     print("Error: Configure Tor as service")
     print("For quick setup refer: https://miloserdov.org/?p=1839")
     exit()
@@ -28,14 +28,16 @@ for url in input_file:
         data = requests.get(url, proxies=proxies)
     except:
         data = 'error'
-    if data.status_code < 400:
+    if data != 'error':
         status = 'Active'
+        status_code = data.status_code
         soup = BeautifulSoup(data.text, 'html.parser')
         for url_title in soup.find_all('title'):
             url_title = str(url_title)
             url_title = url_title.replace('<title>', '')
             url_title = url_title.replace('</title>', '')
-    else:
+    elif data == 'error':
         status = "Inactive"
         url_title = 'NA'
-    print(url, ': ', status, ': ', url_title)
+        status_code = 'NA'
+    print(url, ': ', status, ': ', status_code, ': ', url_title)
