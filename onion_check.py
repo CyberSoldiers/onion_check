@@ -6,7 +6,6 @@ proxies = {
     'https': 'socks5h://127.0.0.1:9050'
 }
 
-# To check the IP just remove the comment from next line....
 print("Tor Connection Check")
 try:
     system_ip = requests.get('https://ident.me', proxies=proxies).text
