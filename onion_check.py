@@ -32,12 +32,11 @@ for url in input_file:
         status = 'Active'
         status_code = data.status_code
         soup = BeautifulSoup(data.text, 'html.parser')
-        for url_title in soup.find_all('title'):
-            url_title = str(url_title)
-            url_title = url_title.replace('<title>', '')
-            url_title = url_title.replace('</title>', '')
+        page_title = str(soup.title)
+        page_title = page_title.replace('<title>', '')
+        page_title = page_title.replace('</title>', '')
     elif data == 'error':
         status = "Inactive"
-        url_title = 'NA'
         status_code = 'NA'
-    print(url, ': ', status, ': ', status_code, ': ', url_title)
+        page_title = 'NA'
+    print(url, ': ', status, ': ', status_code, ': ', page_title)
