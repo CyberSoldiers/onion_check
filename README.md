@@ -11,6 +11,6 @@ Clone the repository.
 ## How it works
 Run the script onion_check.py which will check for Tor Configuration. 
 <br /> If Tor configuration fails, configure it properly [Refer: https://miloserdov.org/?p=1839]
-<br /> If all set, the script asks for input -- submit the file containing onion URLs (one URL in a line) as input
+<br /> If all set, the script asks for input -- submit the file path containing onion URLs (one URL in a line) as input
 
 > **Happy Hunting**
